@@ -1,0 +1,13 @@
+{
+  "question_id": "242",
+  "frontend_id": "242",
+  "slug": "valid-anagram",
+  "title": "Valid Anagram",
+  "difficulty": "Easy",
+  "tags": [
+    "Hash Table",
+    "String",
+    "Sorting"
+  ],
+  "lang": "python3"
+}
