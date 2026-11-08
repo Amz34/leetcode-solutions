@@ -12,11 +12,38 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Sync LeetCode Submissions
-        uses: joshcai/leetcode-sync@v1.7
+      - name: Checkout Repository
+        uses: actions/checkout@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
-          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
-          destination-folder: solutions
-          verbose: true
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: '**/requirements.txt'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests
+
+      - name: Run Resilient LeetCode Sync Engine
+        env:
+          LEETCODE_USERNAME: amz34
+          LEETCODE_CSRF_TOKEN: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }}
+        run: |
+          python3 tools/sync_worker.py
+
+      - name: Commit and Push Synchronized Submissions
+        run: |
+          git config --global user.name "Amz34-Bot"
+          git config --global user.email "bot@amz34.github.io"
+          if [ -n "$(git status --porcelain solutions)" ]; then
+            git add solutions
+            git commit -m "chore(sync): automated leetcode submission sync [skip ci]"
+            git push
+          else
+            echo "No changes to commit. All solutions synchronized."
+          fi
