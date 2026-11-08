@@ -298,7 +298,7 @@ def fetch_problem_by_slug(creds, slug, lang="python3"):
     cpp_file = out_dir / "solution.cpp"
     if not cpp_file.exists() and "cpp" in snippet_map:
         with open(cpp_file, "w", encoding="utf-8") as f:
-            f.write("#include <vector>\n#include <string>\n\n" + snippet_map["cpp"])
+            f.write("#include <vector>\n#include <string>\n#include <unordered_map>\n#include <unordered_set>\nusing namespace std;\n\n" + snippet_map["cpp"])
 
     # Metadata
     meta_path = out_dir / ".meta.json"
