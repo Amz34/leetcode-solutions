@@ -1,0 +1,13 @@
+{
+  "question_id": "15",
+  "frontend_id": "15",
+  "slug": "3sum",
+  "title": "3Sum",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Two Pointers",
+    "Sorting"
+  ],
+  "lang": "python3"
+}

@@ -1,0 +1,13 @@
+{
+  "question_id": "167",
+  "frontend_id": "167",
+  "slug": "two-sum-ii-input-array-is-sorted",
+  "title": "Two Sum II - Input Array Is Sorted",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Two Pointers",
+    "Binary Search"
+  ],
+  "lang": "python3"
+}

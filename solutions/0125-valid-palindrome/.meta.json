@@ -1,0 +1,12 @@
+{
+  "question_id": "125",
+  "frontend_id": "125",
+  "slug": "valid-palindrome",
+  "title": "Valid Palindrome",
+  "difficulty": "Easy",
+  "tags": [
+    "Two Pointers",
+    "String"
+  ],
+  "lang": "python3"
+}

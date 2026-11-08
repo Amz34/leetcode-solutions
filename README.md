@@ -19,9 +19,9 @@
 
 | Category | Metric | Status |
 |:---|:---|:---|
-| **Total Solved** | **10** | <img src="https://img.shields.io/badge/LeetCode-10%20Solved-blue?style=flat-square&logo=leetcode" /> |
-| **Easy** | **4** | <img src="https://img.shields.io/badge/Easy-4-00B8A3?style=flat-square" /> |
-| **Medium** | **6** | <img src="https://img.shields.io/badge/Medium-6-FFC01E?style=flat-square" /> |
+| **Total Solved** | **13** | <img src="https://img.shields.io/badge/LeetCode-13%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Easy** | **5** | <img src="https://img.shields.io/badge/Easy-5-00B8A3?style=flat-square" /> |
+| **Medium** | **8** | <img src="https://img.shields.io/badge/Medium-8-FFC01E?style=flat-square" /> |
 | **Hard** | **0** | <img src="https://img.shields.io/badge/Hard-0-FF375F?style=flat-square" /> |
 | **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
 
@@ -32,7 +32,7 @@
 | Algorithmic Domain | Progress Bar | Solved / Total |
 |:---|:---:|:---:|
 | **Arrays & Hashing** | `██████████` | **8 / 8** (100%) |
-| **Two Pointers** | `░░░░░░░░░░` | **0 / 5** (0%) |
+| **Two Pointers** | `██████░░░░` | **3 / 5** (60%) |
 | **Sliding Window** | `░░░░░░░░░░` | **0 / 5** (0%) |
 | **Stack** | `░░░░░░░░░░` | **0 / 7** (0%) |
 | **Binary Search** | `░░░░░░░░░░` | **0 / 7** (0%) |
@@ -97,10 +97,13 @@
 | # | Title | Difficulty | Solution | Performance |
 |:---:|:---|:---:|:---:|:---:|
 | 0001 | [Two Sum](https://leetcode.com/problems/two-sum/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0001-two-sum/solution.cpp) · [`Python`](./solutions/0001-two-sum/solution.py) · [`Rust`](./solutions/0001-two-sum/solution.rs) | `1 ms` |
+| 0015 | [3Sum](https://leetcode.com/problems/3sum/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0015-3sum/solution.cpp) · [`Python`](./solutions/0015-3sum/solution.py) · [`Rust`](./solutions/0015-3sum/solution.rs) | `Verified` |
 | 0036 | [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0036-valid-sudoku/solution.cpp) · [`Python`](./solutions/0036-valid-sudoku/solution.py) · [`Rust`](./solutions/0036-valid-sudoku/solution.rs) | `Verified` |
 | 0049 | [Group Anagrams](https://leetcode.com/problems/group-anagrams/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0049-group-anagrams/solution.cpp) · [`Python`](./solutions/0049-group-anagrams/solution.py) · [`Rust`](./solutions/0049-group-anagrams/solution.rs) | `Verified` |
 | 0070 | [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0070-climbing-stairs/solution.cpp) · [`Python`](./solutions/0070-climbing-stairs/solution.py) · [`Rust`](./solutions/0070-climbing-stairs/solution.rs) | `Verified` |
+| 0125 | [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0125-valid-palindrome/solution.cpp) · [`Python`](./solutions/0125-valid-palindrome/solution.py) · [`Rust`](./solutions/0125-valid-palindrome/solution.rs) | `Verified` |
 | 0128 | [Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0128-longest-consecutive-sequence/solution.cpp) · [`Python`](./solutions/0128-longest-consecutive-sequence/solution.py) · [`Rust`](./solutions/0128-longest-consecutive-sequence/solution.rs) | `Verified` |
+| 0167 | [Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0167-two-sum-ii-input-array-is-sorted/solution.cpp) · [`Python`](./solutions/0167-two-sum-ii-input-array-is-sorted/solution.py) · [`Rust`](./solutions/0167-two-sum-ii-input-array-is-sorted/solution.rs) | `Verified` |
 | 0217 | [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0217-contains-duplicate/solution.cpp) · [`Python`](./solutions/0217-contains-duplicate/solution.py) · [`Rust`](./solutions/0217-contains-duplicate/solution.rs) | `Verified` |
 | 0238 | [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0238-product-of-array-except-self/solution.cpp) · [`Python`](./solutions/0238-product-of-array-except-self/solution.py) · [`Rust`](./solutions/0238-product-of-array-except-self/solution.rs) | `Verified` |
 | 0242 | [Valid Anagram](https://leetcode.com/problems/valid-anagram/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0242-valid-anagram/solution.cpp) · [`Python`](./solutions/0242-valid-anagram/solution.py) · [`Rust`](./solutions/0242-valid-anagram/solution.rs) | `Verified` |
