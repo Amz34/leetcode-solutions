@@ -856,6 +856,65 @@ def cmd_submit(creds, args):
     print("⚠️ Submission check timed out.")
     return 1
 
+def cmd_update_session(creds, args):
+    session = args.session.strip()
+    csrf = (args.csrf or "").strip()
+
+    config_path = Path("/home/ubuntu/.config/leetcode/config.json")
+    data = {}
+    if config_path.exists():
+        with open(config_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+    data["session"] = session
+    if csrf:
+        data["csrf_token"] = csrf
+
+    with open(config_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+    print(f"✅ Local config updated at {config_path}")
+
+    print("🔄 Updating GitHub repository secrets on Amz34/leetcode-solutions...")
+    subprocess.run(["gh", "secret", "set", "LEETCODE_SESSION", "-R", "Amz34/leetcode-solutions", "-b", session], check=False)
+    if csrf:
+        subprocess.run(["gh", "secret", "set", "LEETCODE_CSRF_TOKEN", "-R", "Amz34/leetcode-solutions", "-b", csrf], check=False)
+    print("✅ GitHub Secrets synchronized!")
+
+    fresh_creds = load_credentials()
+    return cmd_status(fresh_creds, args)
+
+def cmd_solve(creds, args):
+    slug = args.slug.strip().lower()
+
+    matched = list(SOLUTIONS_DIR.glob(f"*-{slug}"))
+    if not matched:
+        print(f"📥 Problem '{slug}' not found locally. Fetching first...")
+        out_dir = fetch_problem_by_slug(creds, slug)
+        if not out_dir:
+            return 1
+        matched = [out_dir]
+
+    problem_dir = matched[0]
+    py_sol = problem_dir / "solution.py"
+
+    if args.ai:
+        ai_runner = Path(__file__).resolve().parent / "ai_solver.py"
+        py_bin = "/home/ubuntu/.venvs/antigravity/bin/python"
+        subprocess.run([py_bin, str(ai_runner), slug], check=True)
+
+    success = run_local_testbench(py_sol)
+    if not success:
+        print("❌ Testbench failed.")
+        return 1
+
+    if args.submit:
+        args.file = str(py_sol)
+        args.git = True
+        return cmd_submit(creds, args)
+
+    return 0
+
 def main():
     parser = argparse.ArgumentParser(description="LeetCode Ultra-High-Pitch Automation Suite")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -867,6 +926,15 @@ def main():
     p_next = subparsers.add_parser("next", help="Recommend & scaffold next high-yield problem")
     p_next.add_argument("--topic", help="Filter by topic domain (e.g. dp, graphs, arrays)")
     p_next.add_argument("--lang", default="python3", help="Target programming language (default: python3)")
+
+    p_solve = subparsers.add_parser("solve", help="Synthesize solution via AI & verify local testbench")
+    p_solve.add_argument("slug", help="LeetCode problem slug (e.g. 'climbing-stairs')")
+    p_solve.add_argument("--ai", action="store_true", default=True, help="Use Gemini 2.5 Flash to synthesize optimal solution")
+    p_solve.add_argument("--submit", action="store_true", help="Submit to LeetCode and auto-push on pass")
+
+    p_upd = subparsers.add_parser("update-session", help="Update LeetCode session token locally & on GitHub secrets")
+    p_upd.add_argument("session", help="New LEETCODE_SESSION cookie value")
+    p_upd.add_argument("--csrf", help="Optional new csrftoken value")
 
     p_daily = subparsers.add_parser("daily", help="Fetch LeetCode Problem of the Day (POTD)")
     p_daily.add_argument("--lang", default="python3", help="Target programming language (default: python3)")
@@ -897,6 +965,10 @@ def main():
         sys.exit(cmd_curriculum(creds, args))
     elif args.command == "next":
         sys.exit(cmd_next(creds, args))
+    elif args.command == "solve":
+        sys.exit(cmd_solve(creds, args))
+    elif args.command == "update-session":
+        sys.exit(cmd_update_session(creds, args))
     elif args.command == "daily":
         sys.exit(cmd_daily(creds, args))
     elif args.command == "test":

@@ -9,7 +9,7 @@
 
 <div align="center">
   <a href="https://leetcode.com/u/amz34/">
-    <a href="https://pastebin.com/6sH3kC7b"><img src="https://img.shields.io/badge/Production_Architectural_Manifest-50%2B_Repositories-003366?style=for-the-badge&logo=pastebin&logoColor=white" alt="Pastebin 50+ Manifest" /></a>
+    <img src="https://leetcard.jacoblin.cool/amz34?theme=dark&font=Ubuntu" alt="LeetCode Stats" />
   </a>
 </div>
 

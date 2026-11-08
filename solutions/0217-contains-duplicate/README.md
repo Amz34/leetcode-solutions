@@ -83,3 +83,17 @@ Example 3:
 - `1 5`
 	
 - `-109 9`
+
+
+---
+
+## Algorithmic Complexity & Proof
+
+- **Technique:** Hash Set
+- **Time Complexity:** $O(N)$
+- **Space Complexity:** $O(N)$
+
+### Proof & Mathematical Analysis
+Time Complexity: We iterate through the input array `nums` exactly once. For each element, we perform a lookup and potentially an insertion into a hash set. On average, hash set operations (insertion and lookup) take O(1) time. Therefore, the total time complexity is O(N * 1) = O(N), where N is the number of elements in `nums`.
+
+Space Complexity: In the worst-case scenario, all elements in `nums` are distinct. In this situation, we would add all N elements to the hash set. Each element requires a constant amount of space. Thus, the space complexity is O(N).

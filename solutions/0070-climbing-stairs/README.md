@@ -56,3 +56,17 @@ Example 2:
 
 	
 - `1
+
+
+---
+
+## Algorithmic Complexity & Proof
+
+- **Technique:** Dynamic Programming with space optimization. The problem can be modeled as finding the Nth Fibonacci number. To reach step 'i', one can either take 1 step from 'i-1' or 2 steps from 'i-2'. Thus, the number of ways to reach step 'i' is the sum of ways to reach 'i-1' and 'i-2'. This forms the Fibonacci recurrence relation: `dp[i] = dp[i-1] + dp[i-2]`. Base cases are `dp[1]=1` (one way to reach step 1: (1)) and `dp[2]=2` (two ways to reach step 2: (1,1), (2)). The solution iteratively calculates these values, only storing the two previous results to achieve O(1) space complexity.
+- **Time Complexity:** $O(n)$
+- **Space Complexity:** $O(1)$
+
+### Proof & Mathematical Analysis
+Time Complexity: The algorithm uses a single loop that iterates from `i = 3` up to `n`. In each iteration, a constant number of arithmetic operations (addition, assignments) are performed. Therefore, the total number of operations is directly proportional to `n`, resulting in a time complexity of O(n). While matrix exponentiation can achieve O(log n) for Fibonacci numbers, for the given constraint `n <= 45`, the O(n) iterative approach is simpler, often faster in practice due to smaller constant factors, and considered optimal for typical competitive programming scenarios.
+
+Space Complexity: The algorithm maintains only three variables (`dp_i_minus_2`, `dp_i_minus_1`, `current_dp`) to store the necessary previous results. The amount of memory used does not grow with the input `n`. Hence, the space complexity is constant, O(1).
