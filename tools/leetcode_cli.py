@@ -329,13 +329,22 @@ def update_readme_dashboard():
                     qid = meta.get("frontend_id") or meta.get("question_id", "0")
                     diff = meta.get("difficulty", "Medium")
                     diff_counts[diff] = diff_counts.get(diff, 0) + 1
+
+                    # Scan all solution files in folder
+                    sol_files = []
+                    for f_item in sorted(p.glob("solution.*")):
+                        ext = f_item.suffix.lstrip(".")
+                        rev = {v: k for k, v in LANG_EXTENSIONS.items()}
+                        lang_label = rev.get(ext, ext).capitalize()
+                        sol_files.append((lang_label, f_item.name))
+
                     problems.append({
                         "id": int(qid),
                         "slug": meta.get("slug", p.name),
                         "title": meta.get("title", p.name),
                         "difficulty": diff,
                         "tags": meta.get("tags", []),
-                        "lang": meta.get("lang", "python3"),
+                        "solutions": sol_files,
                         "runtime": meta.get("runtime", ""),
                         "path": p.name
                     })
@@ -354,7 +363,8 @@ def update_readme_dashboard():
     for item in problems:
         color = diff_badge_color.get(item["difficulty"], "lightgrey")
         diff_badge = f'<img src="https://img.shields.io/badge/-{item["difficulty"]}-{color}?style=flat-square" />'
-        sol_link = f'[`{item["lang"]}`](./solutions/{item["path"]}/solution.{LANG_EXTENSIONS.get(item["lang"], "py")})'
+        links = [f'[`{label}`](./solutions/{item["path"]}/{fn})' for label, fn in item["solutions"]]
+        sol_link = " · ".join(links) if links else f'[`View`](./solutions/{item["path"]}/)'
         runtime_info = f'`{item["runtime"]}`' if item["runtime"] else '`Verified`'
         row = f'| {item["id"]:04d} | [{item["title"]}](https://leetcode.com/problems/{item["slug"]}/) | {diff_badge} | {sol_link} | {runtime_info} |'
         table_rows.append(row)

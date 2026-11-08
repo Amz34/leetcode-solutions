@@ -57,8 +57,8 @@
 
 | # | Title | Difficulty | Solution | Performance |
 |:---:|:---|:---:|:---:|:---:|
-| 0001 | [Two Sum](https://leetcode.com/problems/two-sum/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`python3`](./solutions/0001-two-sum/solution.py) | `1 ms` |
-| 1267 | [Count Servers that Communicate](https://leetcode.com/problems/count-servers-that-communicate/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`python3`](./solutions/1267-count-servers-that-communicate/solution.py) | `14 ms` |
+| 0001 | [Two Sum](https://leetcode.com/problems/two-sum/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0001-two-sum/solution.cpp) · [`Python`](./solutions/0001-two-sum/solution.py) · [`Rust`](./solutions/0001-two-sum/solution.rs) | `1 ms` |
+| 1267 | [Count Servers that Communicate](https://leetcode.com/problems/count-servers-that-communicate/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/1267-count-servers-that-communicate/solution.cpp) · [`Python`](./solutions/1267-count-servers-that-communicate/solution.py) · [`Rust`](./solutions/1267-count-servers-that-communicate/solution.rs) | `14 ms` |
 
 ---
 
