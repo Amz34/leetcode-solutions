@@ -1,58 +1,65 @@
-# ⚡ LeetCode Solutions Vault
+# ⚡ LeetCode Solutions Vault & Algorithmic Excellence
 
-[![LeetCode Stats](https://leetcard.jacoblin.cool/amz34?theme=dark&font=Ubuntu)](https://leetcode.com/u/amz34/)
-
-Automated, bidirectional LeetCode synchronization and problem-solving infrastructure for [@amz34](https://leetcode.com/u/amz34/).
-
----
-
-## 🚀 Architecture
-
-1. **Cloud-Native Auto-Sync (`.github/workflows/leetcode-sync.yml`)**:
-   - Runs automatically on schedule (every 6 hours) or manual trigger (`workflow_dispatch`).
-   - Syncs all accepted submissions directly from LeetCode into GitHub using GitHub Actions and encrypted repository secrets (`LEETCODE_SESSION`, `LEETCODE_CSRF_TOKEN`).
-
-2. **VM / IDE CLI Suite (`tools/leetcode_cli.py`)**:
-   - Integrated command-line interface running on the development VM / IDE.
-   - Allows fetching problem statements, generating solution templates, and submitting code directly to LeetCode with instant test-case execution and optional auto-git commit/push.
+<div align="center">
+  <a href="https://leetcode.com/u/amz34/">
+    <img src="https://leetcard.jacoblin.cool/amz34?theme=dark&font=Ubuntu" alt="LeetCode Stats" />
+  </a>
+</div>
 
 ---
 
-## 🛠️ CLI Usage (On VM / Dev Environment)
+### 📊 Real-Time Metrics & Breakdown
 
-### 1. Check Account & Problem Stats
+| Category | Metric | Status |
+|:---|:---|:---|
+| **Total Solved** | **2** | <img src="https://img.shields.io/badge/LeetCode-2%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Easy** | **1** | <img src="https://img.shields.io/badge/Easy-1-00B8A3?style=flat-square" /> |
+| **Medium** | **1** | <img src="https://img.shields.io/badge/Medium-1-FFC01E?style=flat-square" /> |
+| **Hard** | **0** | <img src="https://img.shields.io/badge/Hard-0-FF375F?style=flat-square" /> |
+| **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
+
+---
+
+## 🚀 Enterprise Architecture
+
+1. **Stealth Headless Chromium Automation (`tools/headless_chromium_sync.py`)**:
+   - Driven by **Patchright** (stealth Playwright fork) and real Google Chrome to bypass Cloudflare bot shields.
+   - Runs locally on schedule (every 2 hours via cron) to extract full code, runtimes, and memory percentiles.
+2. **Cloud-Native Auto-Sync (`.github/workflows/leetcode-sync.yml`)**:
+   - Secondary cloud backup running on GitHub Actions every 6 hours using encrypted repository secrets.
+3. **VM / IDE Bi-Directional CLI (`tools/leetcode_cli.py`)**:
+   - Full CLI workflow for daily challenge fetching, solution scaffolding, and zero-browser submissions.
+
+---
+
+## 🛠️ CLI Commands (On VM / Dev Environment)
+
 ```bash
+# Check LeetCode profile connection & stats
 ./tools/leetcode_cli.py status
-```
 
-### 2. Fetch Problem Statement & Boilerplate
-```bash
-./tools/leetcode_cli.py fetch two-sum --lang python3
-# or
-./tools/leetcode_cli.py fetch longest-substring-without-repeating-characters --lang python3
-```
-This automatically creates:
-- `solutions/<id>-<slug>/README.md` (clean Markdown problem description & tags)
-- `solutions/<id>-<slug>/solution.py` (starter code template)
-- `solutions/<id>-<slug>/.meta.json` (metadata for submissions)
+# Fetch today's LeetCode Problem of the Day (POTD)
+./tools/leetcode_cli.py daily
 
-### 3. Solve & Submit Directly to LeetCode
-```bash
-# Submit to LeetCode and inspect execution:
-./tools/leetcode_cli.py submit solutions/0001-two-sum/solution.py
+# Fetch any arbitrary problem by slug
+./tools/leetcode_cli.py fetch count-servers-that-communicate --lang python3
 
-# Submit and automatically commit & push on ACCEPTED:
+# Submit solution directly to LeetCode with instant testcase run & auto-push
 ./tools/leetcode_cli.py submit solutions/0001-two-sum/solution.py --git
+
+# Regenerate dynamic README dashboard & table
+./tools/leetcode_cli.py dashboard
 ```
 
 ---
 
-## 📂 Solutions Index
+## 📂 Algorithmic Solutions Index
 
-| # | Title | Difficulty | Solution | Status |
-|---|---|---|---|---|
-| 0001 | [Two Sum](https://leetcode.com/problems/two-sum/) | Easy | [Python3](./solutions/0001-two-sum/solution.py) | ✅ Solved |
+| # | Title | Difficulty | Solution | Performance |
+|:---:|:---|:---:|:---:|:---:|
+| 0001 | [Two Sum](https://leetcode.com/problems/two-sum/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`python3`](./solutions/0001-two-sum/solution.py) | `1 ms` |
+| 1267 | [Count Servers that Communicate](https://leetcode.com/problems/count-servers-that-communicate/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`python3`](./solutions/1267-count-servers-that-communicate/solution.py) | `14 ms` |
 
 ---
 
-*Powered by Antigravity Automation & GitHub Actions.*
+*Architected and maintained autonomously by [Aamir Zameer (@Amz34)](https://github.com/Amz34) & Antigravity AI.*

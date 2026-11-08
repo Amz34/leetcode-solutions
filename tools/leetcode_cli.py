@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
 """
-LeetCode CLI & Automation Suite
-=================================
-Automated bidirectional integration for LeetCode <-> GitHub / VM.
+LeetCode CLI & Ultra-High-Pitch Automation Suite
+=================================================
+Enterprise bidirectional integration for LeetCode <-> GitHub / VM.
+Includes:
+ - Real-time account status & stats
+ - Problem fetching & boilerplate scaffolding
+ - Daily Problem of the Day (POTD) auto-scaffolding
+ - Direct submission & instant testcase verification
+ - Dynamic Knowledge Vault & README dashboard compilation
+
 Author: Amz34 / Antigravity
 """
 
@@ -16,6 +23,9 @@ import urllib.request
 import urllib.error
 import subprocess
 from pathlib import Path
+
+REPO_DIR = Path(__file__).resolve().parent.parent
+SOLUTIONS_DIR = REPO_DIR / "solutions"
 
 CONFIG_PATHS = [
     Path("/home/ubuntu/.config/leetcode/config.json"),
@@ -163,9 +173,9 @@ LANG_EXTENSIONS = {
     "c": "c"
 }
 
-def cmd_fetch(creds, args):
-    slug = args.slug.strip().lower()
-    lang = args.lang.strip().lower()
+def fetch_problem_by_slug(creds, slug, lang="python3"):
+    slug = slug.strip().lower()
+    lang = lang.strip().lower()
 
     print(f"📥 Fetching problem: {slug}...")
     query = """
@@ -193,7 +203,7 @@ def cmd_fetch(creds, args):
     q = res.get("data", {}).get("question")
     if not q:
         print(f"❌ Problem '{slug}' not found.")
-        return 1
+        return None
 
     qid = q["questionFrontendId"]
     title = q["title"]
@@ -210,10 +220,10 @@ def cmd_fetch(creds, args):
     if not snippet:
         available = [s["langSlug"] for s in q.get("codeSnippets", [])]
         print(f"⚠️ Language '{lang}' not found. Available: {', '.join(available)}")
-        return 1
+        return None
 
     ext = LANG_EXTENSIONS.get(lang, lang)
-    out_dir = Path("solutions") / f"{int(qid):04d}-{slug}"
+    out_dir = SOLUTIONS_DIR / f"{int(qid):04d}-{slug}"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # Save problem description
@@ -249,6 +259,8 @@ def cmd_fetch(creds, args):
         "frontend_id": qid,
         "slug": slug,
         "title": title,
+        "difficulty": diff,
+        "tags": tags,
         "lang": lang
     }
     with open(meta_path, "w", encoding="utf-8") as f:
@@ -256,7 +268,167 @@ def cmd_fetch(creds, args):
 
     print(f"✅ Saved problem documentation: {readme_path}")
     print(f"🚀 Ready to solve in: {sol_file}")
-    return 0
+    return out_dir
+
+def cmd_fetch(creds, args):
+    res = fetch_problem_by_slug(creds, args.slug, args.lang)
+    return 0 if res else 1
+
+def cmd_daily(creds, args):
+    print("🌟 Querying LeetCode Problem of the Day (POTD)...")
+    query = """
+    query questionOfToday {
+        activeDailyCodingChallengeQuestion {
+            date
+            link
+            question {
+                questionFrontendId
+                title
+                titleSlug
+                difficulty
+                topicTags {
+                    name
+                }
+            }
+        }
+    }
+    """
+    res = graphql_query(creds, query)
+    daily = res.get("data", {}).get("activeDailyCodingChallengeQuestion")
+    if not daily:
+        print("❌ Could not retrieve daily challenge.")
+        return 1
+
+    q = daily["question"]
+    date_str = daily["date"]
+    print(f"📅 Date: {date_str}")
+    print(f"🎯 Problem #{q['questionFrontendId']}: {q['title']} ({q['difficulty']})")
+    print(f"🏷️  Tags: {', '.join([t['name'] for t in q['topicTags']])}")
+
+    out_dir = fetch_problem_by_slug(creds, q["titleSlug"], args.lang)
+    if out_dir:
+        print(f"\n🎉 Daily challenge scaffolded at: {out_dir}")
+        return 0
+    return 1
+
+def update_readme_dashboard():
+    if not SOLUTIONS_DIR.exists():
+        return
+
+    problems = []
+    diff_counts = {"Easy": 0, "Medium": 0, "Hard": 0}
+
+    for p in sorted(SOLUTIONS_DIR.glob("*")):
+        if not p.is_dir():
+            continue
+        meta_file = p / ".meta.json"
+        if meta_file.exists():
+            try:
+                with open(meta_file, "r", encoding="utf-8") as f:
+                    meta = json.load(f)
+                    qid = meta.get("frontend_id") or meta.get("question_id", "0")
+                    diff = meta.get("difficulty", "Medium")
+                    diff_counts[diff] = diff_counts.get(diff, 0) + 1
+                    problems.append({
+                        "id": int(qid),
+                        "slug": meta.get("slug", p.name),
+                        "title": meta.get("title", p.name),
+                        "difficulty": diff,
+                        "tags": meta.get("tags", []),
+                        "lang": meta.get("lang", "python3"),
+                        "runtime": meta.get("runtime", ""),
+                        "path": p.name
+                    })
+            except Exception:
+                pass
+
+    problems.sort(key=lambda x: x["id"])
+
+    diff_badge_color = {
+        "Easy": "00B8A3",
+        "Medium": "FFC01E",
+        "Hard": "FF375F"
+    }
+
+    table_rows = []
+    for item in problems:
+        color = diff_badge_color.get(item["difficulty"], "lightgrey")
+        diff_badge = f'<img src="https://img.shields.io/badge/-{item["difficulty"]}-{color}?style=flat-square" />'
+        sol_link = f'[`{item["lang"]}`](./solutions/{item["path"]}/solution.{LANG_EXTENSIONS.get(item["lang"], "py")})'
+        runtime_info = f'`{item["runtime"]}`' if item["runtime"] else '`Verified`'
+        row = f'| {item["id"]:04d} | [{item["title"]}](https://leetcode.com/problems/{item["slug"]}/) | {diff_badge} | {sol_link} | {runtime_info} |'
+        table_rows.append(row)
+
+    total_solved = len(problems)
+    readme_path = REPO_DIR / "README.md"
+    readme_content = f"""# ⚡ LeetCode Solutions Vault & Algorithmic Excellence
+
+<div align="center">
+  <a href="https://leetcode.com/u/amz34/">
+    <img src="https://leetcard.jacoblin.cool/amz34?theme=dark&font=Ubuntu" alt="LeetCode Stats" />
+  </a>
+</div>
+
+---
+
+### 📊 Real-Time Metrics & Breakdown
+
+| Category | Metric | Status |
+|:---|:---|:---|
+| **Total Solved** | **{total_solved}** | <img src="https://img.shields.io/badge/LeetCode-{total_solved}%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Easy** | **{diff_counts.get('Easy', 0)}** | <img src="https://img.shields.io/badge/Easy-{diff_counts.get('Easy', 0)}-00B8A3?style=flat-square" /> |
+| **Medium** | **{diff_counts.get('Medium', 0)}** | <img src="https://img.shields.io/badge/Medium-{diff_counts.get('Medium', 0)}-FFC01E?style=flat-square" /> |
+| **Hard** | **{diff_counts.get('Hard', 0)}** | <img src="https://img.shields.io/badge/Hard-{diff_counts.get('Hard', 0)}-FF375F?style=flat-square" /> |
+| **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
+
+---
+
+## 🚀 Enterprise Architecture
+
+1. **Stealth Headless Chromium Automation (`tools/headless_chromium_sync.py`)**:
+   - Driven by **Patchright** (stealth Playwright fork) and real Google Chrome to bypass Cloudflare bot shields.
+   - Runs locally on schedule (every 2 hours via cron) to extract full code, runtimes, and memory percentiles.
+2. **Cloud-Native Auto-Sync (`.github/workflows/leetcode-sync.yml`)**:
+   - Secondary cloud backup running on GitHub Actions every 6 hours using encrypted repository secrets.
+3. **VM / IDE Bi-Directional CLI (`tools/leetcode_cli.py`)**:
+   - Full CLI workflow for daily challenge fetching, solution scaffolding, and zero-browser submissions.
+
+---
+
+## 🛠️ CLI Commands (On VM / Dev Environment)
+
+```bash
+# Check LeetCode profile connection & stats
+./tools/leetcode_cli.py status
+
+# Fetch today's LeetCode Problem of the Day (POTD)
+./tools/leetcode_cli.py daily
+
+# Fetch any arbitrary problem by slug
+./tools/leetcode_cli.py fetch count-servers-that-communicate --lang python3
+
+# Submit solution directly to LeetCode with instant testcase run & auto-push
+./tools/leetcode_cli.py submit solutions/0001-two-sum/solution.py --git
+
+# Regenerate dynamic README dashboard & table
+./tools/leetcode_cli.py dashboard
+```
+
+---
+
+## 📂 Algorithmic Solutions Index
+
+| # | Title | Difficulty | Solution | Performance |
+|:---:|:---|:---:|:---:|:---:|
+{chr(10).join(table_rows)}
+
+---
+
+*Architected and maintained autonomously by [Aamir Zameer (@Amz34)](https://github.com/Amz34) & Antigravity AI.*
+"""
+    with open(readme_path, "w", encoding="utf-8") as f:
+        f.write(readme_content)
+    print(f"📊 Dashboard updated: {total_solved} problems indexed in README.md")
 
 def cmd_submit(creds, args):
     file_path = Path(args.file).resolve()
@@ -264,7 +436,6 @@ def cmd_submit(creds, args):
         print(f"❌ File not found: {file_path}")
         return 1
 
-    # Locate .meta.json or deduce problem
     meta_file = file_path.parent / ".meta.json"
     slug = None
     qid = None
@@ -278,7 +449,6 @@ def cmd_submit(creds, args):
             lang = meta.get("lang")
 
     if not slug:
-        # Deduce from folder name (e.g. 0001-two-sum)
         folder = file_path.parent.name
         m = re.match(r'^\d+-(.+)$', folder)
         if m:
@@ -346,9 +516,23 @@ def cmd_submit(creds, args):
                 print(f"⏱️  Runtime: {runtime}" + (f" (beats {run_p:.1f}%)" if run_p is not None else ""))
                 print(f"💾 Memory:  {memory}" + (f" (beats {mem_p:.1f}%)" if mem_p is not None else ""))
 
+                # Update metadata with performance
+                if meta_file.exists():
+                    try:
+                        with open(meta_file, "r", encoding="utf-8") as mf:
+                            mdata = json.load(mf)
+                        mdata["runtime"] = runtime
+                        mdata["memory"] = memory
+                        with open(meta_file, "w", encoding="utf-8") as mf:
+                            json.dump(mdata, mf, indent=2)
+                    except Exception:
+                        pass
+
+                update_readme_dashboard()
+
                 if args.git:
                     print("\n📦 Auto-committing to git...")
-                    subprocess.run(["git", "add", str(file_path.parent)], check=False)
+                    subprocess.run(["git", "add", "."], check=False)
                     msg = f"Solved: {slug} [Accepted] ({runtime}, {memory})"
                     subprocess.run(["git", "commit", "-m", msg], check=False)
                     subprocess.run(["git", "push"], check=False)
@@ -370,11 +554,14 @@ def cmd_submit(creds, args):
     return 1
 
 def main():
-    parser = argparse.ArgumentParser(description="LeetCode CLI & GitHub Sync Suite")
+    parser = argparse.ArgumentParser(description="LeetCode Ultra-High-Pitch Automation Suite")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     p_status = subparsers.add_parser("status", help="Check LeetCode account & problem stats")
     
+    p_daily = subparsers.add_parser("daily", help="Fetch LeetCode Problem of the Day (POTD)")
+    p_daily.add_argument("--lang", default="python3", help="Target programming language (default: python3)")
+
     p_fetch = subparsers.add_parser("fetch", help="Fetch a LeetCode problem description and code template")
     p_fetch.add_argument("slug", help="LeetCode problem title slug (e.g. 'two-sum')")
     p_fetch.add_argument("--lang", default="python3", help="Target programming language (default: python3)")
@@ -384,15 +571,22 @@ def main():
     p_submit.add_argument("--slug", help="Optional override for problem slug")
     p_submit.add_argument("--git", action="store_true", help="Auto git commit and push on ACCEPTED")
 
+    p_dash = subparsers.add_parser("dashboard", help="Regenerate dynamic README dashboard index")
+
     args = parser.parse_args()
     creds = load_credentials()
 
     if args.command == "status":
         sys.exit(cmd_status(creds, args))
+    elif args.command == "daily":
+        sys.exit(cmd_daily(creds, args))
     elif args.command == "fetch":
         sys.exit(cmd_fetch(creds, args))
     elif args.command == "submit":
         sys.exit(cmd_submit(creds, args))
+    elif args.command == "dashboard":
+        update_readme_dashboard()
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()

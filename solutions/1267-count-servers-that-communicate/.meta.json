@@ -1,0 +1,18 @@
+{
+  "question_id": "1396",
+  "frontend_id": "1267",
+  "slug": "count-servers-that-communicate",
+  "title": "Count Servers that Communicate",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Depth-First Search",
+    "Breadth-First Search",
+    "Union-Find",
+    "Matrix",
+    "Counting"
+  ],
+  "lang": "python3",
+  "runtime": "14 ms",
+  "memory": "21.5 MB"
+}

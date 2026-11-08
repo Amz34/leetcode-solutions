@@ -3,5 +3,8 @@
   "frontend_id": "1",
   "slug": "two-sum",
   "title": "Two Sum",
-  "lang": "python3"
+  "difficulty": "Easy",
+  "lang": "python3",
+  "runtime": "1 ms",
+  "memory": "20.3 MB"
 }
