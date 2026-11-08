@@ -1,0 +1,13 @@
+{
+  "question_id": "11",
+  "frontend_id": "11",
+  "slug": "container-with-most-water",
+  "title": "Container With Most Water",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Two Pointers",
+    "Greedy"
+  ],
+  "lang": "python3"
+}

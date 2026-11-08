@@ -1,0 +1,15 @@
+{
+  "question_id": "42",
+  "frontend_id": "42",
+  "slug": "trapping-rain-water",
+  "title": "Trapping Rain Water",
+  "difficulty": "Hard",
+  "tags": [
+    "Array",
+    "Two Pointers",
+    "Dynamic Programming",
+    "Stack",
+    "Monotonic Stack"
+  ],
+  "lang": "python3"
+}

@@ -19,10 +19,10 @@
 
 | Category | Metric | Status |
 |:---|:---|:---|
-| **Total Solved** | **13** | <img src="https://img.shields.io/badge/LeetCode-13%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Total Solved** | **15** | <img src="https://img.shields.io/badge/LeetCode-15%20Solved-blue?style=flat-square&logo=leetcode" /> |
 | **Easy** | **5** | <img src="https://img.shields.io/badge/Easy-5-00B8A3?style=flat-square" /> |
-| **Medium** | **8** | <img src="https://img.shields.io/badge/Medium-8-FFC01E?style=flat-square" /> |
-| **Hard** | **0** | <img src="https://img.shields.io/badge/Hard-0-FF375F?style=flat-square" /> |
+| **Medium** | **9** | <img src="https://img.shields.io/badge/Medium-9-FFC01E?style=flat-square" /> |
+| **Hard** | **1** | <img src="https://img.shields.io/badge/Hard-1-FF375F?style=flat-square" /> |
 | **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
 
 ---
@@ -32,7 +32,7 @@
 | Algorithmic Domain | Progress Bar | Solved / Total |
 |:---|:---:|:---:|
 | **Arrays & Hashing** | `██████████` | **8 / 8** (100%) |
-| **Two Pointers** | `██████░░░░` | **3 / 5** (60%) |
+| **Two Pointers** | `██████████` | **5 / 5** (100%) |
 | **Sliding Window** | `░░░░░░░░░░` | **0 / 5** (0%) |
 | **Stack** | `░░░░░░░░░░` | **0 / 7** (0%) |
 | **Binary Search** | `░░░░░░░░░░` | **0 / 7** (0%) |
@@ -97,8 +97,10 @@
 | # | Title | Difficulty | Solution | Performance |
 |:---:|:---|:---:|:---:|:---:|
 | 0001 | [Two Sum](https://leetcode.com/problems/two-sum/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0001-two-sum/solution.cpp) · [`Python`](./solutions/0001-two-sum/solution.py) · [`Rust`](./solutions/0001-two-sum/solution.rs) | `1 ms` |
+| 0011 | [Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0011-container-with-most-water/solution.cpp) · [`Python`](./solutions/0011-container-with-most-water/solution.py) · [`Rust`](./solutions/0011-container-with-most-water/solution.rs) | `Verified` |
 | 0015 | [3Sum](https://leetcode.com/problems/3sum/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0015-3sum/solution.cpp) · [`Python`](./solutions/0015-3sum/solution.py) · [`Rust`](./solutions/0015-3sum/solution.rs) | `Verified` |
 | 0036 | [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0036-valid-sudoku/solution.cpp) · [`Python`](./solutions/0036-valid-sudoku/solution.py) · [`Rust`](./solutions/0036-valid-sudoku/solution.rs) | `Verified` |
+| 0042 | [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | <img src="https://img.shields.io/badge/-Hard-FF375F?style=flat-square" /> | [`Cpp`](./solutions/0042-trapping-rain-water/solution.cpp) · [`Python`](./solutions/0042-trapping-rain-water/solution.py) · [`Rust`](./solutions/0042-trapping-rain-water/solution.rs) | `Verified` |
 | 0049 | [Group Anagrams](https://leetcode.com/problems/group-anagrams/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0049-group-anagrams/solution.cpp) · [`Python`](./solutions/0049-group-anagrams/solution.py) · [`Rust`](./solutions/0049-group-anagrams/solution.rs) | `Verified` |
 | 0070 | [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0070-climbing-stairs/solution.cpp) · [`Python`](./solutions/0070-climbing-stairs/solution.py) · [`Rust`](./solutions/0070-climbing-stairs/solution.rs) | `Verified` |
 | 0125 | [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0125-valid-palindrome/solution.cpp) · [`Python`](./solutions/0125-valid-palindrome/solution.py) · [`Rust`](./solutions/0125-valid-palindrome/solution.rs) | `Verified` |
