@@ -20,7 +20,33 @@ from pathlib import Path
 REPO_DIR = Path(__file__).resolve().parent.parent
 SOLUTIONS_DIR = REPO_DIR / "solutions"
 CONFIG_FILE = Path("/home/ubuntu/.config/leetcode/config.json")
+TELEGRAM_CFG = Path("/home/ubuntu/.config/telegram/azgem_bot.json")
 CHROME_PATH = "/usr/bin/google-chrome"
+
+def send_telegram(html_text: str) -> bool:
+    try:
+        if not TELEGRAM_CFG.exists():
+            return False
+        with open(TELEGRAM_CFG, "r", encoding="utf-8") as f:
+            cfg = json.load(f)
+        token = cfg.get("token")
+        chat_id = cfg.get("chat_id")
+        if not token or not chat_id:
+            return False
+        import urllib.request
+        url = f"https://api.telegram.org/bot{token}/sendMessage"
+        payload = json.dumps({
+            "chat_id": chat_id,
+            "text": html_text,
+            "parse_mode": "HTML",
+            "disable_web_page_preview": True
+        }).encode("utf-8")
+        req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=6) as resp:
+            return resp.status == 200
+    except Exception as e:
+        print(f"⚠️ Telegram notification skipped: {e}")
+        return False
 
 LANG_EXT_MAP = {
     "python3": "py",
@@ -237,11 +263,18 @@ def run_headless_sync():
     if new_syncs > 0:
         print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] 💾 Committing & pushing {new_syncs} updates to GitHub...")
         os.chdir(REPO_DIR)
-        subprocess.run(["git", "add", "solutions/"], check=False)
+        subprocess.run(["python3", "tools/leetcode_cli.py", "dashboard"], check=False)
+        subprocess.run(["git", "add", "."], check=False)
         msg = f"chore(sync): automated headless chromium sync ({new_syncs} problems)"
         subprocess.run(["git", "commit", "-m", msg], check=False)
         subprocess.run(["git", "push"], check=False)
         print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ✅ Synced and pushed successfully!")
+
+        tele_alert = f"""🤖 <b>Stealth Chromium: Synced {new_syncs} Accepted Problem(s)</b>
+<b>Account:</b> @amz34
+<b>Vault:</b> <a href="https://github.com/Amz34/leetcode-solutions">Amz34/leetcode-solutions</a>
+✅ <b>Dynamic Dashboard Updated & Pushed</b>"""
+        send_telegram(tele_alert)
     else:
         print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ☕ Everything up to date. No new submissions.")
 
