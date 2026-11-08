@@ -1,5 +1,12 @@
 # ⚡ LeetCode Solutions Vault & Algorithmic Excellence
 
+<p align="center">
+  <a href="https://github.com/Amz34/leetcode-solutions/actions/workflows/ci.yml"><img src="https://github.com/Amz34/leetcode-solutions/actions/workflows/ci.yml/badge.svg" alt="CI Testbench" /></a>
+  <a href="https://github.com/Amz34/leetcode-solutions/actions/workflows/leetcode-sync.yml"><img src="https://github.com/Amz34/leetcode-solutions/actions/workflows/leetcode-sync.yml/badge.svg" alt="Cloud Sync" /></a>
+  <img src="https://img.shields.io/badge/Language-Python%20%7C%20Rust%20%7C%20C%2B%2B-blue?style=flat-square" alt="Polyglot" />
+  <img src="https://img.shields.io/badge/Pre--Flight-0.05ms-00B8A3?style=flat-square" alt="Latency" />
+</p>
+
 <div align="center">
   <a href="https://leetcode.com/u/amz34/">
     <img src="https://leetcard.jacoblin.cool/amz34?theme=dark&font=Ubuntu" alt="LeetCode Stats" />
