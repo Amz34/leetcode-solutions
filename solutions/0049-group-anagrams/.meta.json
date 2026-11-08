@@ -1,0 +1,14 @@
+{
+  "question_id": "49",
+  "frontend_id": "49",
+  "slug": "group-anagrams",
+  "title": "Group Anagrams",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Hash Table",
+    "String",
+    "Sorting"
+  ],
+  "lang": "python3"
+}

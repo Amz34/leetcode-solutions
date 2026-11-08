@@ -19,9 +19,9 @@
 
 | Category | Metric | Status |
 |:---|:---|:---|
-| **Total Solved** | **5** | <img src="https://img.shields.io/badge/LeetCode-5%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Total Solved** | **6** | <img src="https://img.shields.io/badge/LeetCode-6%20Solved-blue?style=flat-square&logo=leetcode" /> |
 | **Easy** | **4** | <img src="https://img.shields.io/badge/Easy-4-00B8A3?style=flat-square" /> |
-| **Medium** | **1** | <img src="https://img.shields.io/badge/Medium-1-FFC01E?style=flat-square" /> |
+| **Medium** | **2** | <img src="https://img.shields.io/badge/Medium-2-FFC01E?style=flat-square" /> |
 | **Hard** | **0** | <img src="https://img.shields.io/badge/Hard-0-FF375F?style=flat-square" /> |
 | **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
 
@@ -31,7 +31,7 @@
 
 | Algorithmic Domain | Progress Bar | Solved / Total |
 |:---|:---:|:---:|
-| **Arrays & Hashing** | `███░░░░░░░` | **3 / 8** (38%) |
+| **Arrays & Hashing** | `█████░░░░░` | **4 / 8** (50%) |
 | **Two Pointers** | `░░░░░░░░░░` | **0 / 5** (0%) |
 | **Sliding Window** | `░░░░░░░░░░` | **0 / 5** (0%) |
 | **Stack** | `░░░░░░░░░░` | **0 / 7** (0%) |
@@ -97,6 +97,7 @@
 | # | Title | Difficulty | Solution | Performance |
 |:---:|:---|:---:|:---:|:---:|
 | 0001 | [Two Sum](https://leetcode.com/problems/two-sum/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0001-two-sum/solution.cpp) · [`Python`](./solutions/0001-two-sum/solution.py) · [`Rust`](./solutions/0001-two-sum/solution.rs) | `1 ms` |
+| 0049 | [Group Anagrams](https://leetcode.com/problems/group-anagrams/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0049-group-anagrams/solution.cpp) · [`Python`](./solutions/0049-group-anagrams/solution.py) · [`Rust`](./solutions/0049-group-anagrams/solution.rs) | `Verified` |
 | 0070 | [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0070-climbing-stairs/solution.cpp) · [`Python`](./solutions/0070-climbing-stairs/solution.py) · [`Rust`](./solutions/0070-climbing-stairs/solution.rs) | `Verified` |
 | 0217 | [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0217-contains-duplicate/solution.cpp) · [`Python`](./solutions/0217-contains-duplicate/solution.py) · [`Rust`](./solutions/0217-contains-duplicate/solution.rs) | `Verified` |
 | 0242 | [Valid Anagram](https://leetcode.com/problems/valid-anagram/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0242-valid-anagram/solution.cpp) · [`Python`](./solutions/0242-valid-anagram/solution.py) · [`Rust`](./solutions/0242-valid-anagram/solution.rs) | `Verified` |

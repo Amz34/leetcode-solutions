@@ -500,8 +500,22 @@ def run_local_testbench(file_path: Path) -> bool:
                 elapsed_ms = (time.perf_counter() - t_start) * 1000
 
                 is_match = (actual == expected)
-                if not is_match and isinstance(actual, list) and isinstance(expected, list) and len(actual) == len(expected) == 2:
-                    is_match = sorted(actual) == sorted(expected)
+                if not is_match and isinstance(actual, list) and isinstance(expected, list):
+                    # Check nested list of lists first (order of sublists and elements inside sublists can vary)
+                    try:
+                        sorted_actual = sorted([sorted(sub) if isinstance(sub, list) else sub for sub in actual])
+                        sorted_expected = sorted([sorted(sub) if isinstance(sub, list) else sub for sub in expected])
+                        if sorted_actual == sorted_expected:
+                            is_match = True
+                    except Exception:
+                        pass
+                    # If not matched, try simple flat sort
+                    if not is_match:
+                        try:
+                            if sorted(actual) == sorted(expected):
+                                is_match = True
+                        except Exception:
+                            pass
 
                 if is_match:
                     print(f"  ✅ Case #{idx}: PASSED ({elapsed_ms:.3f} ms)")

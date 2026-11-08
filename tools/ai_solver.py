@@ -87,8 +87,28 @@ Requirements:
     try:
         data = json.loads(response.text)
     except Exception as e:
-        print(f"❌ Failed to parse AI response JSON: {e}")
-        return False
+        # Fallback sanitize raw text in case of unescaped quotes/backslashes
+        import re
+        clean_text = response.text.strip()
+        if clean_text.startswith("```"):
+            clean_text = re.sub(r"^```[a-zA-Z]*\n", "", clean_text)
+            clean_text = re.sub(r"\n```$", "", clean_text)
+        try:
+            data = json.loads(clean_text, strict=False)
+        except Exception:
+            # Retry with explicit json schema or repair
+            print(f"⚠️ JSON parse issue ({e}), attempting resilient repair...")
+            repair_prompt = f"Fix this broken JSON string and return ONLY valid RFC 8259 JSON:\n{response.text}"
+            repaired = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=repair_prompt,
+                config=types.GenerateContentConfig(response_mime_type="application/json")
+            )
+            try:
+                data = json.loads(repaired.text)
+            except Exception as e2:
+                print(f"❌ Failed to parse AI response JSON after repair: {e2}")
+                return False
 
     py_code = data.get("python3_code", "").strip()
     rs_code = data.get("rust_code", "").strip()
