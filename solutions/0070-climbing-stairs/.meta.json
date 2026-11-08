@@ -1,0 +1,13 @@
+{
+  "question_id": "70",
+  "frontend_id": "70",
+  "slug": "climbing-stairs",
+  "title": "Climbing Stairs",
+  "difficulty": "Easy",
+  "tags": [
+    "Math",
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "lang": "python3"
+}

@@ -1,0 +1,13 @@
+{
+  "question_id": "217",
+  "frontend_id": "217",
+  "slug": "contains-duplicate",
+  "title": "Contains Duplicate",
+  "difficulty": "Easy",
+  "tags": [
+    "Array",
+    "Hash Table",
+    "Sorting"
+  ],
+  "lang": "python3"
+}
