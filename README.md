@@ -19,9 +19,9 @@
 
 | Category | Metric | Status |
 |:---|:---|:---|
-| **Total Solved** | **16** | <img src="https://img.shields.io/badge/LeetCode-16%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Total Solved** | **17** | <img src="https://img.shields.io/badge/LeetCode-17%20Solved-blue?style=flat-square&logo=leetcode" /> |
 | **Easy** | **5** | <img src="https://img.shields.io/badge/Easy-5-00B8A3?style=flat-square" /> |
-| **Medium** | **9** | <img src="https://img.shields.io/badge/Medium-9-FFC01E?style=flat-square" /> |
+| **Medium** | **10** | <img src="https://img.shields.io/badge/Medium-10-FFC01E?style=flat-square" /> |
 | **Hard** | **2** | <img src="https://img.shields.io/badge/Hard-2-FF375F?style=flat-square" /> |
 | **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
 
@@ -112,6 +112,7 @@
 | 0347 | [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0347-top-k-frequent-elements/solution.cpp) · [`Python`](./solutions/0347-top-k-frequent-elements/solution.py) · [`Rust`](./solutions/0347-top-k-frequent-elements/solution.rs) | `Verified` |
 | 1267 | [Count Servers that Communicate](https://leetcode.com/problems/count-servers-that-communicate/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/1267-count-servers-that-communicate/solution.cpp) · [`Python`](./solutions/1267-count-servers-that-communicate/solution.py) · [`Rust`](./solutions/1267-count-servers-that-communicate/solution.rs) | `14 ms` |
 | 1606 | [Find Servers That Handled Most Number of Requests](https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/) | <img src="https://img.shields.io/badge/-Hard-FF375F?style=flat-square" /> | [`Cpp`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.cpp) · [`Python`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.py) · [`Rust`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.rs) | `Verified` |
+| 3693 | [Climbing Stairs II](https://leetcode.com/problems/climbing-stairs-ii/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/3693-climbing-stairs-ii/solution.cpp) · [`Python`](./solutions/3693-climbing-stairs-ii/solution.py) · [`Rust`](./solutions/3693-climbing-stairs-ii/solution.rs) | `Verified` |
 
 ---
 

@@ -1,0 +1,12 @@
+{
+  "question_id": "4041",
+  "frontend_id": "3693",
+  "slug": "climbing-stairs-ii",
+  "title": "Climbing Stairs II",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Dynamic Programming"
+  ],
+  "date": "2026-11-10"
+}
