@@ -1,0 +1,12 @@
+{
+  "question_id": "4147",
+  "frontend_id": "3789",
+  "slug": "minimum-cost-to-acquire-required-items",
+  "title": "Minimum Cost to Acquire Required Items",
+  "difficulty": "Medium",
+  "tags": [
+    "Math",
+    "Greedy"
+  ],
+  "date": "2026-11-11"
+}
