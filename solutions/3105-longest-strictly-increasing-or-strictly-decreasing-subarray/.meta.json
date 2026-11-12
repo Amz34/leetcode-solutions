@@ -1,0 +1,11 @@
+{
+  "question_id": "3372",
+  "frontend_id": "3105",
+  "slug": "longest-strictly-increasing-or-strictly-decreasing-subarray",
+  "title": "Longest Strictly Increasing or Strictly Decreasing Subarray",
+  "difficulty": "Easy",
+  "tags": [
+    "Array"
+  ],
+  "date": "2026-11-12"
+}
