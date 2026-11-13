@@ -1,0 +1,17 @@
+{
+  "question_id": "3674",
+  "frontend_id": "3420",
+  "slug": "count-non-decreasing-subarrays-after-k-operations",
+  "title": "Count Non-Decreasing Subarrays After K Operations",
+  "difficulty": "Hard",
+  "tags": [
+    "Array",
+    "Stack",
+    "Segment Tree",
+    "Queue",
+    "Sliding Window",
+    "Monotonic Stack",
+    "Monotonic Queue"
+  ],
+  "date": "2026-11-13"
+}
