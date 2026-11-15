@@ -19,9 +19,9 @@
 
 | Category | Metric | Status |
 |:---|:---|:---|
-| **Total Solved** | **21** | <img src="https://img.shields.io/badge/LeetCode-21%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Total Solved** | **22** | <img src="https://img.shields.io/badge/LeetCode-22%20Solved-blue?style=flat-square&logo=leetcode" /> |
 | **Easy** | **7** | <img src="https://img.shields.io/badge/Easy-7-00B8A3?style=flat-square" /> |
-| **Medium** | **11** | <img src="https://img.shields.io/badge/Medium-11-FFC01E?style=flat-square" /> |
+| **Medium** | **12** | <img src="https://img.shields.io/badge/Medium-12-FFC01E?style=flat-square" /> |
 | **Hard** | **3** | <img src="https://img.shields.io/badge/Hard-3-FF375F?style=flat-square" /> |
 | **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
 
@@ -111,6 +111,7 @@
 | 0242 | [Valid Anagram](https://leetcode.com/problems/valid-anagram/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0242-valid-anagram/solution.cpp) · [`Python`](./solutions/0242-valid-anagram/solution.py) · [`Rust`](./solutions/0242-valid-anagram/solution.rs) | `Verified` |
 | 0347 | [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0347-top-k-frequent-elements/solution.cpp) · [`Python`](./solutions/0347-top-k-frequent-elements/solution.py) · [`Rust`](./solutions/0347-top-k-frequent-elements/solution.rs) | `Verified` |
 | 1267 | [Count Servers that Communicate](https://leetcode.com/problems/count-servers-that-communicate/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/1267-count-servers-that-communicate/solution.cpp) · [`Python`](./solutions/1267-count-servers-that-communicate/solution.py) · [`Rust`](./solutions/1267-count-servers-that-communicate/solution.rs) | `14 ms` |
+| 1524 | [Number of Sub-arrays With Odd Sum](https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.cpp) · [`Python`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.py) · [`Rust`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.rs) | `Verified` |
 | 1606 | [Find Servers That Handled Most Number of Requests](https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/) | <img src="https://img.shields.io/badge/-Hard-FF375F?style=flat-square" /> | [`Cpp`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.cpp) · [`Python`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.py) · [`Rust`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.rs) | `Verified` |
 | 3105 | [Longest Strictly Increasing or Strictly Decreasing Subarray](https://leetcode.com/problems/longest-strictly-increasing-or-strictly-decreasing-subarray/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/3105-longest-strictly-increasing-or-strictly-decreasing-subarray/solution.cpp) · [`Python`](./solutions/3105-longest-strictly-increasing-or-strictly-decreasing-subarray/solution.py) · [`Rust`](./solutions/3105-longest-strictly-increasing-or-strictly-decreasing-subarray/solution.rs) | `Verified` |
 | 3364 | [Minimum Positive Sum Subarray ](https://leetcode.com/problems/minimum-positive-sum-subarray/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/3364-minimum-positive-sum-subarray/solution.cpp) · [`Python`](./solutions/3364-minimum-positive-sum-subarray/solution.py) · [`Rust`](./solutions/3364-minimum-positive-sum-subarray/solution.rs) | `Verified` |

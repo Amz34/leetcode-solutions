@@ -1,0 +1,14 @@
+{
+  "question_id": "1631",
+  "frontend_id": "1524",
+  "slug": "number-of-sub-arrays-with-odd-sum",
+  "title": "Number of Sub-arrays With Odd Sum",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Math",
+    "Dynamic Programming",
+    "Prefix Sum"
+  ],
+  "date": "2026-11-15"
+}
