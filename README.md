@@ -19,10 +19,10 @@
 
 | Category | Metric | Status |
 |:---|:---|:---|
-| **Total Solved** | **23** | <img src="https://img.shields.io/badge/LeetCode-23%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Total Solved** | **24** | <img src="https://img.shields.io/badge/LeetCode-24%20Solved-blue?style=flat-square&logo=leetcode" /> |
 | **Easy** | **8** | <img src="https://img.shields.io/badge/Easy-8-00B8A3?style=flat-square" /> |
 | **Medium** | **12** | <img src="https://img.shields.io/badge/Medium-12-FFC01E?style=flat-square" /> |
-| **Hard** | **3** | <img src="https://img.shields.io/badge/Hard-3-FF375F?style=flat-square" /> |
+| **Hard** | **4** | <img src="https://img.shields.io/badge/Hard-4-FF375F?style=flat-square" /> |
 | **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
 
 ---
@@ -114,6 +114,7 @@
 | 1524 | [Number of Sub-arrays With Odd Sum](https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.cpp) · [`Python`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.py) · [`Rust`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.rs) | `Verified` |
 | 1606 | [Find Servers That Handled Most Number of Requests](https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/) | <img src="https://img.shields.io/badge/-Hard-FF375F?style=flat-square" /> | [`Cpp`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.cpp) · [`Python`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.py) · [`Rust`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.rs) | `Verified` |
 | 2243 | [Calculate Digit Sum of a String](https://leetcode.com/problems/calculate-digit-sum-of-a-string/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/2243-calculate-digit-sum-of-a-string/solution.cpp) · [`Python`](./solutions/2243-calculate-digit-sum-of-a-string/solution.py) · [`Rust`](./solutions/2243-calculate-digit-sum-of-a-string/solution.rs) | `Verified` |
+| 2911 | [Minimum Changes to Make K Semi-palindromes](https://leetcode.com/problems/minimum-changes-to-make-k-semi-palindromes/) | <img src="https://img.shields.io/badge/-Hard-FF375F?style=flat-square" /> | [`Cpp`](./solutions/2911-minimum-changes-to-make-k-semi-palindromes/solution.cpp) · [`Python`](./solutions/2911-minimum-changes-to-make-k-semi-palindromes/solution.py) · [`Rust`](./solutions/2911-minimum-changes-to-make-k-semi-palindromes/solution.rs) | `Verified` |
 | 3105 | [Longest Strictly Increasing or Strictly Decreasing Subarray](https://leetcode.com/problems/longest-strictly-increasing-or-strictly-decreasing-subarray/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/3105-longest-strictly-increasing-or-strictly-decreasing-subarray/solution.cpp) · [`Python`](./solutions/3105-longest-strictly-increasing-or-strictly-decreasing-subarray/solution.py) · [`Rust`](./solutions/3105-longest-strictly-increasing-or-strictly-decreasing-subarray/solution.rs) | `Verified` |
 | 3364 | [Minimum Positive Sum Subarray ](https://leetcode.com/problems/minimum-positive-sum-subarray/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/3364-minimum-positive-sum-subarray/solution.cpp) · [`Python`](./solutions/3364-minimum-positive-sum-subarray/solution.py) · [`Rust`](./solutions/3364-minimum-positive-sum-subarray/solution.rs) | `Verified` |
 | 3420 | [Count Non-Decreasing Subarrays After K Operations](https://leetcode.com/problems/count-non-decreasing-subarrays-after-k-operations/) | <img src="https://img.shields.io/badge/-Hard-FF375F?style=flat-square" /> | [`Cpp`](./solutions/3420-count-non-decreasing-subarrays-after-k-operations/solution.cpp) · [`Python`](./solutions/3420-count-non-decreasing-subarrays-after-k-operations/solution.py) · [`Rust`](./solutions/3420-count-non-decreasing-subarrays-after-k-operations/solution.rs) | `Verified` |

@@ -1,0 +1,13 @@
+{
+  "question_id": "2879",
+  "frontend_id": "2911",
+  "slug": "minimum-changes-to-make-k-semi-palindromes",
+  "title": "Minimum Changes to Make K Semi-palindromes",
+  "difficulty": "Hard",
+  "tags": [
+    "Two Pointers",
+    "String",
+    "Dynamic Programming"
+  ],
+  "date": "2026-11-17"
+}
