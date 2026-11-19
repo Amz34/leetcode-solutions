@@ -1,0 +1,13 @@
+{
+  "question_id": "2706",
+  "frontend_id": "2567",
+  "slug": "minimum-score-by-changing-two-elements",
+  "title": "Minimum Score by Changing Two Elements",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Greedy",
+    "Sorting"
+  ],
+  "date": "2026-11-19"
+}
