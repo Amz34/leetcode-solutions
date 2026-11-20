@@ -1,0 +1,13 @@
+{
+  "question_id": "3298",
+  "frontend_id": "3041",
+  "slug": "maximize-consecutive-elements-in-an-array-after-modification",
+  "title": "Maximize Consecutive Elements in an Array After Modification",
+  "difficulty": "Hard",
+  "tags": [
+    "Array",
+    "Dynamic Programming",
+    "Sorting"
+  ],
+  "date": "2026-11-20"
+}
