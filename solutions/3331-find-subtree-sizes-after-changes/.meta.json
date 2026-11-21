@@ -1,0 +1,15 @@
+{
+  "question_id": "3576",
+  "frontend_id": "3331",
+  "slug": "find-subtree-sizes-after-changes",
+  "title": "Find Subtree Sizes After Changes",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Hash Table",
+    "String",
+    "Tree",
+    "Depth-First Search"
+  ],
+  "date": "2026-11-21"
+}
