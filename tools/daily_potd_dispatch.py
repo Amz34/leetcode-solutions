@@ -193,8 +193,12 @@ def run_daily_dispatch():
         subprocess.run(["git", "add", "."], check=False)
         msg = f"chore(daily): scaffold POTD #{q['questionFrontendId']} - {title} ({diff})"
         subprocess.run(["git", "commit", "-m", msg], check=False)
-        subprocess.run(["git", "push"], check=False)
-        print("✅ Committed & pushed to GitHub!")
+        subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], check=False)
+        push_res = subprocess.run(["git", "push", "origin", "main"], check=False)
+        if push_res.returncode == 0:
+            print("✅ Committed & pushed to GitHub!")
+        else:
+            print(f"⚠️ Committed locally, git push returned rc={push_res.returncode}")
 
     # Telegram briefing
     tele_msg = f"""🎯 <b>Daily LeetCode Challenge: #{q['questionFrontendId']} {title}</b>

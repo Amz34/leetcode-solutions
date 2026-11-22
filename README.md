@@ -19,8 +19,8 @@
 
 | Category | Metric | Status |
 |:---|:---|:---|
-| **Total Solved** | **28** | <img src="https://img.shields.io/badge/LeetCode-28%20Solved-blue?style=flat-square&logo=leetcode" /> |
-| **Easy** | **8** | <img src="https://img.shields.io/badge/Easy-8-00B8A3?style=flat-square" /> |
+| **Total Solved** | **29** | <img src="https://img.shields.io/badge/LeetCode-29%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Easy** | **9** | <img src="https://img.shields.io/badge/Easy-9-00B8A3?style=flat-square" /> |
 | **Medium** | **15** | <img src="https://img.shields.io/badge/Medium-15-FFC01E?style=flat-square" /> |
 | **Hard** | **5** | <img src="https://img.shields.io/badge/Hard-5-FF375F?style=flat-square" /> |
 | **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
@@ -113,6 +113,7 @@
 | 1267 | [Count Servers that Communicate](https://leetcode.com/problems/count-servers-that-communicate/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/1267-count-servers-that-communicate/solution.cpp) · [`Python`](./solutions/1267-count-servers-that-communicate/solution.py) · [`Rust`](./solutions/1267-count-servers-that-communicate/solution.rs) | `14 ms` |
 | 1524 | [Number of Sub-arrays With Odd Sum](https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.cpp) · [`Python`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.py) · [`Rust`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.rs) | `Verified` |
 | 1606 | [Find Servers That Handled Most Number of Requests](https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/) | <img src="https://img.shields.io/badge/-Hard-FF375F?style=flat-square" /> | [`Cpp`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.cpp) · [`Python`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.py) · [`Rust`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.rs) | `Verified` |
+| 2124 | [Check if All A's Appears Before All B's](https://leetcode.com/problems/check-if-all-as-appears-before-all-bs/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/2124-check-if-all-as-appears-before-all-bs/solution.cpp) · [`Python`](./solutions/2124-check-if-all-as-appears-before-all-bs/solution.py) · [`Rust`](./solutions/2124-check-if-all-as-appears-before-all-bs/solution.rs) | `Verified` |
 | 2243 | [Calculate Digit Sum of a String](https://leetcode.com/problems/calculate-digit-sum-of-a-string/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/2243-calculate-digit-sum-of-a-string/solution.cpp) · [`Python`](./solutions/2243-calculate-digit-sum-of-a-string/solution.py) · [`Rust`](./solutions/2243-calculate-digit-sum-of-a-string/solution.rs) | `Verified` |
 | 2567 | [Minimum Score by Changing Two Elements](https://leetcode.com/problems/minimum-score-by-changing-two-elements/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/2567-minimum-score-by-changing-two-elements/solution.cpp) · [`Python`](./solutions/2567-minimum-score-by-changing-two-elements/solution.py) · [`Rust`](./solutions/2567-minimum-score-by-changing-two-elements/solution.rs) | `Verified` |
 | 2911 | [Minimum Changes to Make K Semi-palindromes](https://leetcode.com/problems/minimum-changes-to-make-k-semi-palindromes/) | <img src="https://img.shields.io/badge/-Hard-FF375F?style=flat-square" /> | [`Cpp`](./solutions/2911-minimum-changes-to-make-k-semi-palindromes/solution.cpp) · [`Python`](./solutions/2911-minimum-changes-to-make-k-semi-palindromes/solution.py) · [`Rust`](./solutions/2911-minimum-changes-to-make-k-semi-palindromes/solution.rs) | `Verified` |
@@ -128,7 +129,3 @@
 ---
 
 *Architected and maintained autonomously by [Aamir Zameer (@Amz34)](https://github.com/Amz34) & Antigravity AI.*
-
----
-
-Part of [my always-on agent stack](https://github.com/Amz34) · [Awesome Agent Infrastructure](https://github.com/Amz34/awesome-agent-infrastructure) (135 live-checked building blocks).
