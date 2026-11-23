@@ -1,0 +1,15 @@
+{
+  "question_id": "1477",
+  "frontend_id": "1352",
+  "slug": "product-of-the-last-k-numbers",
+  "title": "Product of the Last K Numbers",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Math",
+    "Design",
+    "Data Stream",
+    "Prefix Sum"
+  ],
+  "date": "2026-11-23"
+}

@@ -19,9 +19,9 @@
 
 | Category | Metric | Status |
 |:---|:---|:---|
-| **Total Solved** | **29** | <img src="https://img.shields.io/badge/LeetCode-29%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Total Solved** | **30** | <img src="https://img.shields.io/badge/LeetCode-30%20Solved-blue?style=flat-square&logo=leetcode" /> |
 | **Easy** | **9** | <img src="https://img.shields.io/badge/Easy-9-00B8A3?style=flat-square" /> |
-| **Medium** | **15** | <img src="https://img.shields.io/badge/Medium-15-FFC01E?style=flat-square" /> |
+| **Medium** | **16** | <img src="https://img.shields.io/badge/Medium-16-FFC01E?style=flat-square" /> |
 | **Hard** | **5** | <img src="https://img.shields.io/badge/Hard-5-FF375F?style=flat-square" /> |
 | **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
 
@@ -111,6 +111,7 @@
 | 0242 | [Valid Anagram](https://leetcode.com/problems/valid-anagram/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/0242-valid-anagram/solution.cpp) · [`Python`](./solutions/0242-valid-anagram/solution.py) · [`Rust`](./solutions/0242-valid-anagram/solution.rs) | `Verified` |
 | 0347 | [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/0347-top-k-frequent-elements/solution.cpp) · [`Python`](./solutions/0347-top-k-frequent-elements/solution.py) · [`Rust`](./solutions/0347-top-k-frequent-elements/solution.rs) | `Verified` |
 | 1267 | [Count Servers that Communicate](https://leetcode.com/problems/count-servers-that-communicate/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/1267-count-servers-that-communicate/solution.cpp) · [`Python`](./solutions/1267-count-servers-that-communicate/solution.py) · [`Rust`](./solutions/1267-count-servers-that-communicate/solution.rs) | `14 ms` |
+| 1352 | [Product of the Last K Numbers](https://leetcode.com/problems/product-of-the-last-k-numbers/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/1352-product-of-the-last-k-numbers/solution.cpp) · [`Python`](./solutions/1352-product-of-the-last-k-numbers/solution.py) · [`Rust`](./solutions/1352-product-of-the-last-k-numbers/solution.rs) | `Verified` |
 | 1524 | [Number of Sub-arrays With Odd Sum](https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.cpp) · [`Python`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.py) · [`Rust`](./solutions/1524-number-of-sub-arrays-with-odd-sum/solution.rs) | `Verified` |
 | 1606 | [Find Servers That Handled Most Number of Requests](https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/) | <img src="https://img.shields.io/badge/-Hard-FF375F?style=flat-square" /> | [`Cpp`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.cpp) · [`Python`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.py) · [`Rust`](./solutions/1606-find-servers-that-handled-most-number-of-requests/solution.rs) | `Verified` |
 | 2124 | [Check if All A's Appears Before All B's](https://leetcode.com/problems/check-if-all-as-appears-before-all-bs/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/2124-check-if-all-as-appears-before-all-bs/solution.cpp) · [`Python`](./solutions/2124-check-if-all-as-appears-before-all-bs/solution.py) · [`Rust`](./solutions/2124-check-if-all-as-appears-before-all-bs/solution.rs) | `Verified` |
