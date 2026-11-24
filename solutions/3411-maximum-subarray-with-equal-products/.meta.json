@@ -1,0 +1,15 @@
+{
+  "question_id": "3702",
+  "frontend_id": "3411",
+  "slug": "maximum-subarray-with-equal-products",
+  "title": "Maximum Subarray With Equal Products",
+  "difficulty": "Easy",
+  "tags": [
+    "Array",
+    "Math",
+    "Sliding Window",
+    "Enumeration",
+    "Number Theory"
+  ],
+  "date": "2026-11-24"
+}

@@ -19,8 +19,8 @@
 
 | Category | Metric | Status |
 |:---|:---|:---|
-| **Total Solved** | **30** | <img src="https://img.shields.io/badge/LeetCode-30%20Solved-blue?style=flat-square&logo=leetcode" /> |
-| **Easy** | **9** | <img src="https://img.shields.io/badge/Easy-9-00B8A3?style=flat-square" /> |
+| **Total Solved** | **31** | <img src="https://img.shields.io/badge/LeetCode-31%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Easy** | **10** | <img src="https://img.shields.io/badge/Easy-10-00B8A3?style=flat-square" /> |
 | **Medium** | **16** | <img src="https://img.shields.io/badge/Medium-16-FFC01E?style=flat-square" /> |
 | **Hard** | **5** | <img src="https://img.shields.io/badge/Hard-5-FF375F?style=flat-square" /> |
 | **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
@@ -123,6 +123,7 @@
 | 3105 | [Longest Strictly Increasing or Strictly Decreasing Subarray](https://leetcode.com/problems/longest-strictly-increasing-or-strictly-decreasing-subarray/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/3105-longest-strictly-increasing-or-strictly-decreasing-subarray/solution.cpp) · [`Python`](./solutions/3105-longest-strictly-increasing-or-strictly-decreasing-subarray/solution.py) · [`Rust`](./solutions/3105-longest-strictly-increasing-or-strictly-decreasing-subarray/solution.rs) | `Verified` |
 | 3331 | [Find Subtree Sizes After Changes](https://leetcode.com/problems/find-subtree-sizes-after-changes/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/3331-find-subtree-sizes-after-changes/solution.cpp) · [`Python`](./solutions/3331-find-subtree-sizes-after-changes/solution.py) · [`Rust`](./solutions/3331-find-subtree-sizes-after-changes/solution.rs) | `Verified` |
 | 3364 | [Minimum Positive Sum Subarray ](https://leetcode.com/problems/minimum-positive-sum-subarray/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/3364-minimum-positive-sum-subarray/solution.cpp) · [`Python`](./solutions/3364-minimum-positive-sum-subarray/solution.py) · [`Rust`](./solutions/3364-minimum-positive-sum-subarray/solution.rs) | `Verified` |
+| 3411 | [Maximum Subarray With Equal Products](https://leetcode.com/problems/maximum-subarray-with-equal-products/) | <img src="https://img.shields.io/badge/-Easy-00B8A3?style=flat-square" /> | [`Cpp`](./solutions/3411-maximum-subarray-with-equal-products/solution.cpp) · [`Python`](./solutions/3411-maximum-subarray-with-equal-products/solution.py) · [`Rust`](./solutions/3411-maximum-subarray-with-equal-products/solution.rs) | `Verified` |
 | 3420 | [Count Non-Decreasing Subarrays After K Operations](https://leetcode.com/problems/count-non-decreasing-subarrays-after-k-operations/) | <img src="https://img.shields.io/badge/-Hard-FF375F?style=flat-square" /> | [`Cpp`](./solutions/3420-count-non-decreasing-subarrays-after-k-operations/solution.cpp) · [`Python`](./solutions/3420-count-non-decreasing-subarrays-after-k-operations/solution.py) · [`Rust`](./solutions/3420-count-non-decreasing-subarrays-after-k-operations/solution.rs) | `Verified` |
 | 3693 | [Climbing Stairs II](https://leetcode.com/problems/climbing-stairs-ii/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/3693-climbing-stairs-ii/solution.cpp) · [`Python`](./solutions/3693-climbing-stairs-ii/solution.py) · [`Rust`](./solutions/3693-climbing-stairs-ii/solution.rs) | `Verified` |
 | 3789 | [Minimum Cost to Acquire Required Items](https://leetcode.com/problems/minimum-cost-to-acquire-required-items/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/3789-minimum-cost-to-acquire-required-items/solution.cpp) · [`Python`](./solutions/3789-minimum-cost-to-acquire-required-items/solution.py) · [`Rust`](./solutions/3789-minimum-cost-to-acquire-required-items/solution.rs) | `Verified` |
@@ -130,7 +131,3 @@
 ---
 
 *Architected and maintained autonomously by [Aamir Zameer (@Amz34)](https://github.com/Amz34) & Antigravity AI.*
-
----
-
-Part of [my always-on agent stack](https://github.com/Amz34) · [Awesome Agent Infrastructure](https://github.com/Amz34/awesome-agent-infrastructure) (135 live-checked building blocks).
