@@ -1,0 +1,16 @@
+{
+  "question_id": "4105",
+  "frontend_id": "3934",
+  "slug": "smallest-unique-subarray",
+  "title": "Smallest Unique Subarray",
+  "difficulty": "Hard",
+  "tags": [
+    "Array",
+    "Hash Table",
+    "Binary Search",
+    "Rolling Hash",
+    "Suffix Array",
+    "Hash Function"
+  ],
+  "date": "2026-11-25"
+}
