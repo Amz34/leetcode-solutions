@@ -111,10 +111,12 @@ def run_headless_sync():
     from patchright.sync_api import sync_playwright
 
     new_syncs = 0
+    launch_env = {k: v for k, v in os.environ.items() if k != "DBUS_SESSION_BUS_ADDRESS"}
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
             executable_path=CHROME_PATH,
+            env=launch_env,
             args=[
                 "--no-sandbox",
                 "--disable-gpu",
@@ -134,7 +136,18 @@ def run_headless_sync():
             ])
 
             page = context.new_page()
-            page.goto("https://leetcode.com", wait_until="domcontentloaded", timeout=20000)
+            last_nav_err = None
+            for attempt in range(1, 3):
+                try:
+                    page.goto("https://leetcode.com", wait_until="domcontentloaded", timeout=25000)
+                    last_nav_err = None
+                    break
+                except Exception as exc:
+                    last_nav_err = exc
+                    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ⚠️ Navigation attempt {attempt} failed: {exc}")
+                    time.sleep(3)
+            if last_nav_err is not None:
+                raise last_nav_err
 
             # Persist any refreshed csrf/session cookies issued on initial navigation
             live_cookies = context.cookies("https://leetcode.com")
@@ -292,12 +305,21 @@ def run_headless_sync():
                         with open(readme_file, "w", encoding="utf-8") as f:
                             f.write(readme_content)
 
+                    existing_meta = {}
+                    if meta_file.exists():
+                        try:
+                            existing_meta = json.loads(meta_file.read_text(encoding="utf-8"))
+                        except Exception:
+                            existing_meta = {}
                     meta = {
-                        "question_id": qid,
+                        **existing_meta,
+                        "question_id": existing_meta.get("question_id") or qid,
+                        "frontend_id": existing_meta.get("frontend_id") or q.get("questionFrontendId", str(int(qid))),
                         "submission_id": sub_id,
                         "slug": title_slug,
                         "title": title,
                         "difficulty": diff,
+                        "tags": existing_meta.get("tags") or tags,
                         "lang": lang_name,
                         "runtime": runtime_str,
                         "memory": memory_str
@@ -322,7 +344,10 @@ def run_headless_sync():
         subprocess.run(["git", "add", "."], check=False)
         msg = f"chore(sync): automated headless chromium sync ({new_syncs} problems)"
         subprocess.run(["git", "commit", "-m", msg], check=False)
-        subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], check=False)
+        rebase_res = subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], check=False)
+        if rebase_res.returncode != 0:
+            print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ❌ git pull --rebase failed (rc={rebase_res.returncode}).")
+            sys.exit(rebase_res.returncode)
         push_res = subprocess.run(["git", "push", "origin", "main"], check=False)
         if push_res.returncode != 0:
             print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ❌ git push failed (rc={push_res.returncode}).")

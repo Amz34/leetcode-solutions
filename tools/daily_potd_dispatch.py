@@ -102,12 +102,21 @@ def run_daily_dispatch():
     }
     """
     payload = json.dumps({"query": query}).encode("utf-8")
-    req = urllib.request.Request("https://leetcode.com/graphql", data=payload, headers=headers)
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except Exception as e:
-        print(f"❌ Failed to fetch daily question: {e}")
+    data = None
+    last_err = None
+    for attempt in range(1, 4):
+        req = urllib.request.Request("https://leetcode.com/graphql", data=payload, headers=headers)
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                last_err = None
+                break
+        except Exception as e:
+            last_err = e
+            print(f"⚠️ POTD fetch attempt {attempt}/3 failed: {e}")
+            time.sleep(3 * attempt)
+    if last_err is not None or data is None:
+        print(f"❌ Failed to fetch daily question after 3 attempts: {last_err}")
         return 1
 
     daily = data.get("data", {}).get("activeDailyCodingChallengeQuestion")
@@ -185,20 +194,25 @@ def run_daily_dispatch():
         with open(meta_path, "w", encoding="utf-8") as f:
             json.dump(meta, f, indent=2)
 
-    # Auto commit and push if new
-    if not already_existed:
-        print(f"📦 Committing new daily scaffold for {title}...")
-        os.chdir(REPO_DIR)
-        subprocess.run(["python3", "tools/leetcode_cli.py", "dashboard"], check=False)
+    # Auto commit and push if anything changed (even if folder existed from partial run)
+    os.chdir(REPO_DIR)
+    subprocess.run(["python3", "tools/leetcode_cli.py", "dashboard"], check=False)
+    dirty = subprocess.check_output(["git", "status", "--porcelain"], text=True).strip()
+    if dirty:
+        print(f"📦 Committing daily scaffold for {title}...")
         subprocess.run(["git", "add", "."], check=False)
         msg = f"chore(daily): scaffold POTD #{q['questionFrontendId']} - {title} ({diff})"
         subprocess.run(["git", "commit", "-m", msg], check=False)
-        subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], check=False)
+        rebase_res = subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], check=False)
+        if rebase_res.returncode != 0:
+            print(f"⚠️ git pull --rebase failed (rc={rebase_res.returncode})")
+            return rebase_res.returncode
         push_res = subprocess.run(["git", "push", "origin", "main"], check=False)
         if push_res.returncode == 0:
             print("✅ Committed & pushed to GitHub!")
         else:
             print(f"⚠️ Committed locally, git push returned rc={push_res.returncode}")
+            return push_res.returncode
 
     # Telegram briefing
     tele_msg = f"""🎯 <b>Daily LeetCode Challenge: #{q['questionFrontendId']} {title}</b>
