@@ -1,9 +1,10 @@
 name: Sync LeetCode Solutions
 
+# Note: Scheduled sync runs on the primary Oracle VM via headless_chromium_sync.py
+# so a single runner owns the rotating LEETCODE_SESSION cookie without replay-invalidation.
+# Keep workflow_dispatch enabled for manual fallback runs.
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 */6 * * *' # Automatically sync every 6 hours
 
 permissions:
   contents: write
@@ -38,9 +39,10 @@ jobs:
         run: |
           git config --global user.name "Amz34-Bot"
           git config --global user.email "bot@amz34.github.io"
-          if [ -n "$(git status --porcelain solutions)" ]; then
-            git add solutions
+          if [ -n "$(git status --porcelain solutions README.md)" ]; then
+            git add solutions README.md
             git commit -m "chore(sync): automated leetcode submission sync [skip ci]"
+            git pull --rebase --autostash origin main
             git push
           else
             echo "No changes to commit. All solutions synchronized."

@@ -72,6 +72,35 @@ def load_config():
     with open(CONFIG_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def save_refreshed_cookies(config: dict, cookies: list[dict]) -> None:
+    """Persist rotated LEETCODE_SESSION / csrftoken cookies and sync GH Actions secrets."""
+    cookie_map = {c.get("name"): c.get("value", "") for c in cookies}
+    new_session = cookie_map.get("LEETCODE_SESSION") or config["session"]
+    new_csrf = cookie_map.get("csrftoken") or config["csrf_token"]
+    if new_session == config["session"] and new_csrf == config["csrf_token"]:
+        return
+
+    updated = {**config, "session": new_session, "csrf_token": new_csrf}
+    tmp_path = CONFIG_FILE.with_suffix(".tmp")
+    tmp_path.write_text(json.dumps(updated, indent=2), encoding="utf-8")
+    tmp_path.chmod(0o600)
+    tmp_path.replace(CONFIG_FILE)
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] 🔄 Persisted refreshed LeetCode cookies to {CONFIG_FILE}")
+
+    for secret_name, secret_val in (("LEETCODE_SESSION", new_session), ("LEETCODE_CSRF_TOKEN", new_csrf)):
+        try:
+            subprocess.run(
+                ["gh", "secret", "set", secret_name, "-R", "Amz34/leetcode-solutions"],
+                input=secret_val,
+                text=True,
+                capture_output=True,
+                timeout=15,
+                check=False,
+            )
+        except Exception:
+            pass
+
+
 def run_headless_sync():
     print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] 🚀 Starting Headless Chromium Sync...")
     config = load_config()
@@ -81,6 +110,7 @@ def run_headless_sync():
 
     from patchright.sync_api import sync_playwright
 
+    new_syncs = 0
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
@@ -92,85 +122,40 @@ def run_headless_sync():
                 "--disable-blink-features=AutomationControlled"
             ]
         )
-        context = browser.new_context(
-            user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-            viewport={"width": 1280, "height": 800}
-        )
-        context.add_cookies([
-            {"name": "LEETCODE_SESSION", "value": session, "domain": ".leetcode.com", "path": "/"},
-            {"name": "csrftoken", "value": csrf, "domain": ".leetcode.com", "path": "/"}
-        ])
+        context = None
+        is_authenticated = False
+        try:
+            context = browser.new_context(
+                viewport={"width": 1280, "height": 800}
+            )
+            context.add_cookies([
+                {"name": "LEETCODE_SESSION", "value": session, "domain": ".leetcode.com", "path": "/"},
+                {"name": "csrftoken", "value": csrf, "domain": ".leetcode.com", "path": "/"}
+            ])
 
-        page = context.new_page()
-        page.goto("https://leetcode.com", wait_until="domcontentloaded", timeout=20000)
+            page = context.new_page()
+            page.goto("https://leetcode.com", wait_until="domcontentloaded", timeout=20000)
 
-        # 1. Fetch recent accepted submission list
-        list_query = """
-        query recentAcSubmissions($username: String!, $limit: Int!) {
-            recentAcSubmissionList(username: $username, limit: $limit) {
-                id
-                title
-                titleSlug
-                timestamp
-            }
-        }
-        """
-        raw_list = page.evaluate("""async ({query, username, csrf}) => {
-            const resp = await fetch("https://leetcode.com/graphql", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-csrftoken": csrf
-                },
-                body: JSON.stringify({
-                    query: query,
-                    variables: { username: username, limit: 30 }
-                })
-            });
-            return await resp.json();
-        }""", {"query": list_query, "username": username, "csrf": csrf})
+            # Persist any refreshed csrf/session cookies issued on initial navigation
+            live_cookies = context.cookies("https://leetcode.com")
+            live_csrf = next((c["value"] for c in live_cookies if c.get("name") == "csrftoken" and c.get("value")), csrf)
 
-        submissions = raw_list.get("data", {}).get("recentAcSubmissionList", [])
-        print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] 📋 Retrieved {len(submissions)} recent submissions for @{username}.")
-
-        if not submissions:
-            print("No submissions to sync.")
-            browser.close()
-            return
-
-        detail_query = """
-        query submissionDetails($submissionId: Int!) {
-            submissionDetails(submissionId: $submissionId) {
-                runtime
-                runtimeDisplay
-                memoryDisplay
-                code
-                timestamp
-                lang {
-                    name
-                    verboseName
+            # 1. Verify authentication + fetch recent accepted submission list
+            list_query = """
+            query recentAcSubmissions($username: String!, $limit: Int!) {
+                userStatus {
+                    isSignedIn
+                    username
                 }
-                question {
-                    questionFrontendId
+                recentAcSubmissionList(username: $username, limit: $limit) {
+                    id
                     title
                     titleSlug
-                    difficulty
-                    content
-                    topicTags {
-                        name
-                    }
+                    timestamp
                 }
             }
-        }
-        """
-
-        new_syncs = 0
-        for sub in submissions:
-            sub_id = int(sub["id"])
-            title_slug = sub["titleSlug"]
-
-            # Detail fetch
-            sub_detail_raw = page.evaluate("""async ({query, subId, csrf}) => {
+            """
+            raw_list = page.evaluate("""async ({query, username, csrf}) => {
                 const resp = await fetch("https://leetcode.com/graphql", {
                     method: "POST",
                     headers: {
@@ -179,50 +164,115 @@ def run_headless_sync():
                     },
                     body: JSON.stringify({
                         query: query,
-                        variables: { submissionId: subId }
+                        variables: { username: username, limit: 30 }
                     })
                 });
                 return await resp.json();
-            }""", {"query": detail_query, "subId": sub_id, "csrf": csrf})
+            }""", {"query": list_query, "username": username, "csrf": live_csrf})
 
-            detail = sub_detail_raw.get("data", {}).get("submissionDetails")
-            if not detail:
-                continue
+            data = raw_list.get("data") or {}
+            user_status = data.get("userStatus") or {}
+            if not user_status.get("isSignedIn"):
+                print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ❌ LeetCode session expired or invalid (isSignedIn=False). Refresh {CONFIG_FILE}.")
+                sys.exit(1)
 
-            q = detail.get("question", {})
-            qid = q.get("questionFrontendId", "0").zfill(4)
-            title = q.get("title", sub["title"])
-            diff = q.get("difficulty", "Medium")
-            tags = [t["name"] for t in q.get("topicTags", [])]
-            lang_name = detail.get("lang", {}).get("name", "python3")
-            code = detail.get("code", "")
-            runtime_str = detail.get("runtimeDisplay", "")
-            memory_str = detail.get("memoryDisplay", "")
+            is_authenticated = True
+            save_refreshed_cookies(config, context.cookies("https://leetcode.com"))
+            config = load_config()
 
-            ext = LANG_EXT_MAP.get(lang_name, "txt")
-            folder_name = f"{qid}-{title_slug}"
-            target_dir = SOLUTIONS_DIR / folder_name
-            target_dir.mkdir(parents=True, exist_ok=True)
+            submissions = data.get("recentAcSubmissionList") or []
+            print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] 📋 Retrieved {len(submissions)} recent submissions for @{username}.")
 
-            sol_file = target_dir / f"solution.{ext}"
-            readme_file = target_dir / "README.md"
-            meta_file = target_dir / ".meta.json"
+            if not submissions:
+                print("No submissions to sync.")
+                return
 
-            # Check if this exact code was already written
-            is_new = False
-            if not sol_file.exists():
-                is_new = True
-            else:
-                with open(sol_file, "r", encoding="utf-8") as f:
-                    if f.read().strip() != code.strip():
-                        is_new = True
+            detail_query = """
+            query submissionDetails($submissionId: Int!) {
+                submissionDetails(submissionId: $submissionId) {
+                    runtime
+                    runtimeDisplay
+                    memoryDisplay
+                    code
+                    timestamp
+                    lang {
+                        name
+                        verboseName
+                    }
+                    question {
+                        questionFrontendId
+                        title
+                        titleSlug
+                        difficulty
+                        content
+                        topicTags {
+                            name
+                        }
+                    }
+                }
+            }
+            """
 
-            if is_new:
-                with open(sol_file, "w", encoding="utf-8") as f:
-                    f.write(code)
+            for sub in submissions:
+                sub_id = int(sub["id"])
+                title_slug = sub["titleSlug"]
 
-                # Generate clean Markdown description
-                readme_content = f"""# {int(qid)}. {title}
+                # Detail fetch
+                sub_detail_raw = page.evaluate("""async ({query, subId, csrf}) => {
+                    const resp = await fetch("https://leetcode.com/graphql", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "x-csrftoken": csrf
+                        },
+                        body: JSON.stringify({
+                            query: query,
+                            variables: { submissionId: subId }
+                        })
+                    });
+                    return await resp.json();
+                }""", {"query": detail_query, "subId": sub_id, "csrf": live_csrf})
+
+                detail = (sub_detail_raw.get("data") or {}).get("submissionDetails")
+                if not detail:
+                    print(f"  ⚠️ Empty submissionDetails for {sub_id} ({title_slug}); skipping.")
+                    continue
+
+                q = detail.get("question", {})
+                qid = q.get("questionFrontendId", "0").zfill(4)
+                title = q.get("title", sub["title"])
+                diff = q.get("difficulty", "Medium")
+                tags = [t["name"] for t in q.get("topicTags", [])]
+                lang_name = detail.get("lang", {}).get("name", "python3")
+                code = detail.get("code", "")
+                runtime_str = detail.get("runtimeDisplay", "")
+                memory_str = detail.get("memoryDisplay", "")
+
+                ext = LANG_EXT_MAP.get(lang_name, "txt")
+                folder_name = f"{qid}-{title_slug}"
+                target_dir = SOLUTIONS_DIR / folder_name
+                target_dir.mkdir(parents=True, exist_ok=True)
+
+                sol_file = target_dir / f"solution.{ext}"
+                readme_file = target_dir / "README.md"
+                meta_file = target_dir / ".meta.json"
+
+                # Check if this exact code was already written
+                is_new = False
+                if not sol_file.exists():
+                    is_new = True
+                else:
+                    with open(sol_file, "r", encoding="utf-8") as f:
+                        if f.read().strip() != code.strip():
+                            is_new = True
+
+                if is_new:
+                    with open(sol_file, "w", encoding="utf-8") as f:
+                        f.write(code)
+
+                    # Generate clean Markdown description only if README doesn't already have a problem description
+                    if not readme_file.exists() or "## Problem Description" not in readme_file.read_text(encoding="utf-8"):
+                        readme_content = f"""# {int(qid)}. {title}
 
 **Difficulty:** {diff}  
 **Tags:** {', '.join(tags)}  
@@ -239,26 +289,31 @@ def run_headless_sync():
 {code}
 ```
 """
-                with open(readme_file, "w", encoding="utf-8") as f:
-                    f.write(readme_content)
+                        with open(readme_file, "w", encoding="utf-8") as f:
+                            f.write(readme_content)
 
-                meta = {
-                    "question_id": qid,
-                    "submission_id": sub_id,
-                    "slug": title_slug,
-                    "title": title,
-                    "difficulty": diff,
-                    "lang": lang_name,
-                    "runtime": runtime_str,
-                    "memory": memory_str
-                }
-                with open(meta_file, "w", encoding="utf-8") as f:
-                    json.dump(meta, f, indent=2)
+                    meta = {
+                        "question_id": qid,
+                        "submission_id": sub_id,
+                        "slug": title_slug,
+                        "title": title,
+                        "difficulty": diff,
+                        "lang": lang_name,
+                        "runtime": runtime_str,
+                        "memory": memory_str
+                    }
+                    with open(meta_file, "w", encoding="utf-8") as f:
+                        json.dump(meta, f, indent=2)
 
-                print(f"  ✨ Synced: [{qid}] {title} ({runtime_str}, {memory_str})")
-                new_syncs += 1
-
-        browser.close()
+                    print(f"  ✨ Synced: [{qid}] {title} ({runtime_str}, {memory_str})")
+                    new_syncs += 1
+        finally:
+            if context is not None and is_authenticated:
+                try:
+                    save_refreshed_cookies(config, context.cookies("https://leetcode.com"))
+                except Exception:
+                    pass
+            browser.close()
 
     if new_syncs > 0:
         print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] 💾 Committing & pushing {new_syncs} updates to GitHub...")
@@ -267,7 +322,11 @@ def run_headless_sync():
         subprocess.run(["git", "add", "."], check=False)
         msg = f"chore(sync): automated headless chromium sync ({new_syncs} problems)"
         subprocess.run(["git", "commit", "-m", msg], check=False)
-        subprocess.run(["git", "push"], check=False)
+        subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], check=False)
+        push_res = subprocess.run(["git", "push", "origin", "main"], check=False)
+        if push_res.returncode != 0:
+            print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ❌ git push failed (rc={push_res.returncode}).")
+            sys.exit(push_res.returncode)
         print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ✅ Synced and pushed successfully!")
 
         tele_alert = f"""🤖 <b>Stealth Chromium: Synced {new_syncs} Accepted Problem(s)</b>
