@@ -1,0 +1,13 @@
+{
+  "question_id": "3742",
+  "frontend_id": "3946",
+  "slug": "maximum-number-of-items-from-sale-i",
+  "title": "Maximum Number of Items From Sale I",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Dynamic Programming",
+    "Greedy"
+  ],
+  "date": "2026-11-27"
+}
