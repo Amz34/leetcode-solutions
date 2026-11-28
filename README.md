@@ -19,9 +19,9 @@
 
 | Category | Metric | Status |
 |:---|:---|:---|
-| **Total Solved** | **34** | <img src="https://img.shields.io/badge/LeetCode-34%20Solved-blue?style=flat-square&logo=leetcode" /> |
+| **Total Solved** | **35** | <img src="https://img.shields.io/badge/LeetCode-35%20Solved-blue?style=flat-square&logo=leetcode" /> |
 | **Easy** | **11** | <img src="https://img.shields.io/badge/Easy-11-00B8A3?style=flat-square" /> |
-| **Medium** | **17** | <img src="https://img.shields.io/badge/Medium-17-FFC01E?style=flat-square" /> |
+| **Medium** | **18** | <img src="https://img.shields.io/badge/Medium-18-FFC01E?style=flat-square" /> |
 | **Hard** | **6** | <img src="https://img.shields.io/badge/Hard-6-FF375F?style=flat-square" /> |
 | **Sync Engine** | Stealth Chromium Daemon | `Operational` (2h Interval + GitHub Actions) |
 
@@ -130,6 +130,7 @@
 | 3789 | [Minimum Cost to Acquire Required Items](https://leetcode.com/problems/minimum-cost-to-acquire-required-items/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/3789-minimum-cost-to-acquire-required-items/solution.cpp) · [`Python`](./solutions/3789-minimum-cost-to-acquire-required-items/solution.py) · [`Rust`](./solutions/3789-minimum-cost-to-acquire-required-items/solution.rs) | `Verified` |
 | 3934 | [Smallest Unique Subarray](https://leetcode.com/problems/smallest-unique-subarray/) | <img src="https://img.shields.io/badge/-Hard-FF375F?style=flat-square" /> | [`Cpp`](./solutions/3934-smallest-unique-subarray/solution.cpp) · [`Python`](./solutions/3934-smallest-unique-subarray/solution.py) · [`Rust`](./solutions/3934-smallest-unique-subarray/solution.rs) | `Verified` |
 | 3946 | [Maximum Number of Items From Sale I](https://leetcode.com/problems/maximum-number-of-items-from-sale-i/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/3946-maximum-number-of-items-from-sale-i/solution.cpp) · [`Python`](./solutions/3946-maximum-number-of-items-from-sale-i/solution.py) · [`Rust`](./solutions/3946-maximum-number-of-items-from-sale-i/solution.rs) | `Verified` |
+| 3947 | [Maximum Number of Items From Sale II](https://leetcode.com/problems/maximum-number-of-items-from-sale-ii/) | <img src="https://img.shields.io/badge/-Medium-FFC01E?style=flat-square" /> | [`Cpp`](./solutions/3947-maximum-number-of-items-from-sale-ii/solution.cpp) · [`Python`](./solutions/3947-maximum-number-of-items-from-sale-ii/solution.py) · [`Rust`](./solutions/3947-maximum-number-of-items-from-sale-ii/solution.rs) | `Verified` |
 
 ---
 
